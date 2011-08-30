@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'date'
-require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'cloudfiles-backup')
+require File.join(File.expand_path(File.dirname(__FILE__)), '..', 'lib', 'cloudfiles-backup')
 
 #
 # Restore the file specified in the comandline arguments from the configured

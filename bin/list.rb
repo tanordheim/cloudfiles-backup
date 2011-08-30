@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'cloudfiles-backup')
+require File.join(File.expand_path(File.dirname(__FILE__)), '..', 'lib', 'cloudfiles-backup')
 
 #
 # Lists all files currently stored within the configuredCloudFiles container.
