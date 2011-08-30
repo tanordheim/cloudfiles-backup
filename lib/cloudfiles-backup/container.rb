@@ -28,6 +28,8 @@ module CloudFilesBackup #:nodoc
 
       file.close
 
+      puts " -> Stored #{file_path} as #{object_name}"
+
     end
 
     # Restore a file from the container
@@ -43,6 +45,8 @@ module CloudFilesBackup #:nodoc
 
       object = container.object(object_name)
       object.save_to_filename(filename)
+
+      puts " -> Restored #{object_name} as #{filename} to the current directory"
 
     end
 
@@ -62,12 +66,12 @@ module CloudFilesBackup #:nodoc
         if object_name =~ OBJECT_DATE_REGEXP
 
           object_date = Date.parse($1)
-          object_age = (today - backup_date).to_i
-          puts "Found object #{object_name}, #{object_age} days old based on date #{object_date}"
+          object_age = (today - object_date).to_i
 
           if object_age > @config.retention_days
 
-            # TODO - delete item
+            container.delete_object(object_name)
+            puts " -> Purged old backup #{object_name}"
 
           end
 
