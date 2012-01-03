@@ -5,7 +5,7 @@ require 'date'
 
 module CloudFilesBackup #:nodoc
 
-  OBJECT_DATE_REGEXP = /^\[(\d{4}-\d{2}-\d{2})\]_/
+  OBJECT_DATE_REGEXP = /^(\d{4}-\d{2}-\d{2})_/
 
   # Lists, stores and restores files from the configured Rackspace CloudFiles
   # container.
@@ -22,7 +22,7 @@ module CloudFilesBackup #:nodoc
       filename = File.basename(file_path)
       file = File.open(file_path, 'r')
 
-      object_name = "[#{Date.today.strftime('%Y-%m-%d')}]_#{filename}"
+      object_name = "#{Date.today.strftime('%Y-%m-%d')}_#{filename}"
       object = container.create_object(object_name)
       object.write(file)
 
@@ -35,7 +35,7 @@ module CloudFilesBackup #:nodoc
     # Restore a file from the container
     def restore!(date, filename)
 
-      object_name = "[#{date.strftime('%Y-%m-%d')}]_#{filename}"
+      object_name = "#{date.strftime('%Y-%m-%d')}_#{filename}"
       unless container.object_exists?(object_name)
         raise "Object #{object_name} not found in container."
       end
